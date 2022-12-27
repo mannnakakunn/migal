@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "mdi":"mdi-home-account",
+    "title": "Home",
+    "url":"/"
+  },
+  {
+    "id": 2,
+    "mdi":"mdi-magnify",
+    "title": "Search",
+    "url":"/search/"
+  },
+  {
+    "id": 3,
+    "mdi":"mdi-fire",
+    "title": "Ranking",
+    "url":"/ranking/"
+  },
+  {
+    "id": 4,
+    "mdi":"mdi-bookmark",
+    "title": "Bookmark",
+    "url":"/bookmark/"
+  },
+  {
+    "id": 5,
+    "mdi":"mdi-account",
+    "title": "account",
+    "url":"/account/"
+  }
+]
