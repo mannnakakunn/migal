@@ -11,8 +11,6 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
-import undermenubar from "/data/json/undermenubar.json";
-
 // import required modules
 import { Controller, FreeMode, Navigation, Pagination, Thumbs } from "swiper";
 
@@ -44,75 +42,11 @@ const items = [
     artist: "2",
   },
 ];
-
-let drawer = ref(null);
 </script>
 
 <template>
-  <v-card style="z-index: 100">
-    <v-layout>
-      <v-navigation-drawer
-        v-model="drawer"
-        temporary
-        class="bg-teal-darken-4 py-6"
-      >
-        <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
-          title="John Leider"
-        ></v-list-item>
-
-        <v-divider></v-divider>
-
-        <v-list density="compact" nav>
-          <v-list-item
-            prepend-icon="mdi-view-dashboard"
-            title="Home"
-            value="home"
-          ></v-list-item>
-          <v-list-item
-            prepend-icon="mdi-forum"
-            title="About"
-            value="about"
-          ></v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-    </v-layout>
-  </v-card>
   <div style="background-color: #f2f7f6">
-    <!-- ヘッダー -->
-    <div
-      class="d-flex flex-row justify-space-between align-center py-2 px-4"
-      style="
-        position: fixed;
-        z-index: 99;
-        width: 100vw;
-        background-color: #f2f7f6;
-      "
-    >
-      <v-icon class="text-teal-darken-3" @click.stop="drawer = !drawer"
-        >mdi-menu</v-icon
-      >
-      <div class="d-flex flex-row align-center">
-        <div class="logo px-2">
-          <img :src="'/img/logo-icon.png'" width="24" height="24" />
-        </div>
-        <div>
-          <div
-            style="font-size: 1.5rem; font-family: Futura, 'Century Gothic'"
-            class="font-italic font-weight-light text-teal-darken-4"
-          >
-            nuxt3
-          </div>
-        </div>
-      </div>
-      <v-avatar size="36" class="">
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/john.jpg"
-          alt="John"
-        ></v-img>
-      </v-avatar>
-    </div>
-
+    <Header />
     <div
       style="padding-top: 7vh; padding-bottom: 15vh; background-color: #e0ece8"
     >
@@ -231,7 +165,7 @@ let drawer = ref(null);
         <swiper-slide v-for="n in 3">
           <div
             v-for="n in 3"
-            class="d-flex flex-no-wrap justify-space-between align-center mb-3 pb-3"
+            class="d-flex flex-no-wrap justify-space-between align-center mb-3 pb-3 popular-box"
             style="border-bottom: solid 1px #c3dbd5; font-size: 0.8rem"
           >
             <div>
@@ -280,8 +214,11 @@ let drawer = ref(null);
         </swiper-slide>
       </swiper>
 
-      <!-- Special -->
-      <div class="bg-teal-darken-2 pa-6 mx-4 rounded-xl" style="height: auto">
+      <!-- Topic Area -->
+      <div
+        class="bg-teal-darken-2 pt-6 px-6 pb-3 mx-4 rounded-xl"
+        style="height: auto"
+      >
         <div
           class="font-weight-bold pb-4 mb-4"
           style="
@@ -290,12 +227,11 @@ let drawer = ref(null);
             font-size: 1rem;
           "
         >
-          特集が入ります
+          Topic No.1
         </div>
         <div
           v-for="n in 3"
-          class="d-flex flex-no-wrap justify-space-between align-center mb-6 pb-4"
-          style="border-bottom: solid 1px #378b71"
+          class="d-flex flex-no-wrap justify-space-between align-center topic-box"
         >
           <div>
             <v-img
@@ -308,47 +244,43 @@ let drawer = ref(null);
             class="d-flex flex-column"
             style="width: 60vw; word-wrap: break-word; color: #b7fad3"
           >
-            <div v-text="items[0].title"></div>
-            <div class="text-teal-lighten-3 text-subtitle-2">2022.12.31</div>
+            <div v-text="'Topic ' + items[0].title"></div>
+            <div class="d-flex flex-row pt-2 pb-0 mb-0">
+              <v-avatar size="18">
+                <v-img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
+                ></v-img>
+              </v-avatar>
+              <div class="text-teal-lighten-4 pl-1" style="font-size: 0.75rem">
+                John
+              </div>
+            </div>
+            <div style="font-size: 0.65rem" class="text-teal-lighten-3 pt-1">
+              Update.2022.10.11
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- UnderMenu -->
-      <div
-        class="d-flex flex-row justify-space-between"
-        style="
-          position: fixed;
-          bottom: 0;
-          background-color: #eefaf5;
-          z-index: 99;
-          height: 12.5vh;
-          padding-top: 1vh;
-          padding-left: 2vw;
-          padding-right: 2vw;
-        "
-      >
-        <v-btn
-          v-for="menu in undermenubar"
-          :key="menu"
-          class="text-teal-darken-4"
-          variant="text"
-          width="19.5vw"
-          height="19.5vw"
-          style="border-radius: 50%"
-        >
-          <NuxtLink :to="menu.url">
-            <div class="d-flex flex-column">
-              <div style="font-size: 1rem">
-                <v-icon>{{ menu.mdi }}</v-icon>
-              </div>
-              <div class="pt-1 text-teal" style="font-size: 0.5rem">
-                {{ menu.title }}
-              </div>
-            </div>
-          </NuxtLink>
-        </v-btn>
-      </div>
+      <Footer />
     </div>
   </div>
 </template>
+
+<style scoped>
+.popular-box:nth-of-type(3n) {
+  border-bottom: none !important;
+}
+
+.topic-box {
+  border-bottom: solid 1px #378b71;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.topic-box:last-child {
+  border-bottom: none;
+  padding-bottom: none;
+  margin-bottom: none;
+}
+</style>

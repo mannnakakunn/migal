@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify"],
   },
-  modules: ['@nuxt/content'],
+  modules: ['@nuxt/content','@nuxtjs/supabase'],
   content: {
     documentDriven: {
       layoutFallbacks: ['theme'],
