@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // sideDrawer
-let drawer = ref(null);
+let drawer = ref(false);
 </script>
 
 <template>
@@ -54,7 +54,7 @@ let drawer = ref(null);
       </div>
       <div>
         <div
-          style="font-size: 1.5rem; font-family: Futura, 'Century Gothic'"
+          style="font-size: 1.5rem; font-family: 'Futura', 'Century Gothic'"
           class="font-italic font-weight-light text-teal-darken-4"
         >
           nuxt3
